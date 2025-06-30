@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学术成果 - 学术个人网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">我的学术网站</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">关于我</a></li>
+                <li><a href="publications.html" class="active">学术成果</a></li>
+                <li><a href="projects.html">开源项目</a></li>
+                <li><a href="blog.html">博客</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="publications">
+            <div class="container">
+                <h1>学术成果</h1>
+                
+                <div class="publication-filters">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="journal">期刊论文</button>
+                    <button class="filter-btn" data-filter="conference">会议论文</button>
+                    <button class="filter-btn" data-filter="preprint">预印本</button>
+                </div>
+                
+                <div class="publication-list">
+                    <!-- 期刊论文 -->
+                    <div class="publication-item journal">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <h3>基于深度学习的自然语言处理新方法研究</h3>
+                            <p class="authors">张三, 李四, 王五</p>
+                            <p class="journal">《计算机学报》, 46(5): 1023-1035</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://doi.org/10.xxxx/xxxxx" class="btn btn-small"><i class="fas fa-external-link-alt"></i> DOI</a>
+                                <a href="https://arxiv.org/abs/xxxx.xxxxx" class="btn btn-small"><i class="fas fa-archive"></i> arXiv</a>
+                                <a href="#" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="publication-item journal">
+                        <div class="publication-year">2022</div>
+                        <div class="publication-content">
+                            <h3>多模态深度学习在医学影像分析中的应用</h3>
+                            <p class="authors">张三, 赵六, 钱七</p>
+                            <p class="journal">《自动化学报》, 48(3): 521-534</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://doi.org/10.xxxx/xxxxx" class="btn btn-small"><i class="fas fa-external-link-alt"></i> DOI</a>
+                                <a href="#" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 会议论文 -->
+                    <div class="publication-item conference">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <h3>基于深度学习的图像识别新方法</h3>
+                            <p class="authors">张三, 孙八, 周九</p>
+                            <p class="journal">CVPR 2023, 第36届计算机视觉与模式识别会议, pp. 1234-1242</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://doi.org/10.xxxx/xxxxx" class="btn btn-small"><i class="fas fa-external-link-alt"></i> DOI</a>
+                                <a href="https://github.com/username/repo" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                                <a href="#" class="btn btn-small"><i class="fas fa-desktop"></i> 幻灯片</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="publication-item conference">
+                        <div class="publication-year">2022</div>
+                        <div class="publication-content">
+                            <h3>大规模预训练模型在自然语言处理中的应用</h3>
+                            <p class="authors">张三, 李四</p>
+                            <p class="journal">AAAI 2022, 第36届人工智能国际会议, pp. 5678-5686</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://doi.org/10.xxxx/xxxxx" class="btn btn-small"><i class="fas fa-external-link-alt"></i> DOI</a>
+                                <a href="https://github.com/username/repo" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="publication-item conference">
+                        <div class="publication-year">2021</div>
+                        <div class="publication-content">
+                            <h3>基于注意力机制的神经机器翻译研究</h3>
+                            <p class="authors">张三, 王五, 赵六</p>
+                            <p class="journal">ACL 2021, 第59届计算语言学协会年会, pp. 789-798</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://doi.org/10.xxxx/xxxxx" class="btn btn-small"><i class="fas fa-external-link-alt"></i> DOI</a>
+                                <a href="https://github.com/username/repo" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 预印本 -->
+                    <div class="publication-item preprint">
+                        <div class="publication-year">2023</div>
+                        <div class="publication-content">
+                            <h3>大型语言模型的可解释性研究</h3>
+                            <p class="authors">张三, 李四, 王五</p>
+                            <p class="journal">arXiv preprint arXiv:2310.xxxxx</p>
+                            <div class="publication-links">
+                                <a href="#" class="btn btn-small"><i class="fas fa-file-pdf"></i> PDF</a>
+                                <a href="https://arxiv.org/abs/2310.xxxxx" class="btn btn-small"><i class="fas fa-archive"></i> arXiv</a>
+                                <a href="https://github.com/username/repo" class="btn btn-small"><i class="fas fa-code"></i> 代码</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 张三. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>开源项目 - 学术个人网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">我的学术网站</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">关于我</a></li>
+                <li><a href="publications.html">学术成果</a></li>
+                <li><a href="projects.html" class="active">开源项目</a></li>
+                <li><a href="blog.html">博客</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="projects">
+            <div class="container">
+                <h1>开源项目</h1>
+                
+                <div class="project-filters">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="nlp">自然语言处理</button>
+                    <button class="filter-btn" data-filter="cv">计算机视觉</button>
+                    <button class="filter-btn" data-filter="ml">机器学习</button>
+                </div>
+                
+                <div class="project-grid">
+                    <div class="project-card nlp">
+                        <div class="project-image">
+                            <img src="img/project1.jpg" alt="NLP-Toolkit项目截图">
+                        </div>
+                        <div class="project-content">
+                            <h3>NLP-Toolkit</h3>
+                            <p class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">NLP</span>
+                            </p>
+                            <p class="project-description">
+                                一个用于自然语言处理任务的综合工具包，包括文本分类、命名实体识别、情感分析等功能。基于PyTorch实现，支持多种预训练模型。
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/username/nlp-toolkit" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://nlp-toolkit.readthedocs.io/" target="_blank" class="btn"><i class="fas fa-book"></i> 文档</a>
+                                <a href="https://pypi.org/project/nlp-toolkit/" target="_blank" class="btn"><i class="fab fa-python"></i> PyPI</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card cv">
+                        <div class="project-image">
+                            <img src="img/project2.jpg" alt="ImageNet-Models项目截图">
+                        </div>
+                        <div class="project-content">
+                            <h3>ImageNet-Models</h3>
+                            <p class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">TensorFlow</span>
+                                <span class="tag">Computer Vision</span>
+                            </p>
+                            <p class="project-description">
+                                一系列在ImageNet数据集上预训练的深度学习模型集合，包括ResNet、VGG、MobileNet等架构。提供模型权重和推理代码。
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/username/imagenet-models" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://huggingface.co/username/imagenet-models" target="_blank" class="btn"><i class="fas fa-cube"></i> 模型</a>
+                                <a href="https://colab.research.google.com/github/username/imagenet-models/blob/main/demo.ipynb" target="_blank" class="btn"><i class="fas fa-play"></i> 演示</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card ml">
+                        <div class="project-image">
+                            <img src="img/project3.jpg" alt="AutoML-Framework项目截图">
+                        </div>
+                        <div class="project-content">
+                            <h3>AutoML-Framework</h3>
+                            <p class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">Scikit-learn</span>
+                                <span class="tag">Machine Learning</span>
+                            </p>
+                            <p class="project-description">
+                                一个自动机器学习框架，可以自动进行特征工程、模型选择和超参数优化。适用于表格数据的分类和回归任务。
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/username/automl-framework" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://automl-framework.readthedocs.io/" target="_blank" class="btn"><i class="fas fa-book"></i> 文档</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card nlp">
+                        <div class="project-image">
+                            <img src="img/project4.jpg" alt="Chinese-BERT项目截图">
+                        </div>
+                        <div class="project-content">
+                            <h3>Chinese-BERT</h3>
+                            <p class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">NLP</span>
+                            </p>
+                            <p class="project-description">
+                                针对中文文本优化的BERT预训练模型，在多个中文NLP任务上取得了优异的性能，包括文本分类、命名实体识别和问答系统。
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/username/chinese-bert" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://huggingface.co/username/chinese-bert" target="_blank" class="btn"><i class="fas fa-cube"></i> 模型</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card cv ml">
+                        <div class="project-image">
+                            <img src="img/project5.jpg" alt="Medical-Image-Analysis项目截图">
+                        </div>
+                        <div class="project-content">
+                            <h3>Medical-Image-Analysis</h3>
+                            <p class="project-tags">
+                                <span class="tag">Python</span>
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">Medical AI</span>
+                            </p>
+                            <p class="project-description">
+                                用于医学图像分析的深度学习工具包，支持CT、MRI和X光图像的分割、分类和异常检测。包含预训练模型和数据预处理工具。
+                            </p>
+                            <div class="project-links">
+                                <a href="https://github.com/username/medical-image-analysis" target="_blank" class="btn"><i class="fab fa-github"></i> GitHub</a>
+                                <a href="https://medical-image-analysis.readthedocs.io/" target="_blank" class="btn"><i class="fas fa-book"></i> 文档</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 张三. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>博客 - 学术个人网站</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="index.html">我的学术网站</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="about.html">关于我</a></li>
+                <li><a href="publications.html">学术成果</a></li>
+                <li><a href="projects.html">开源项目</a></li>
+                <li><a href="blog.html" class="active">博客</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog">
+            <div class="container">
+                <h1>博客</h1>
+                
+                <div class="blog-filters">
+                    <button class="filter-btn active" data-filter="all">全部</button>
+                    <button class="filter-btn" data-filter="tech">技术笔记</button>
+                    <button class="filter-btn" data-filter="research">研究思考</button>
+                    <button class="filter-btn" data-filter="review">论文解读</button>
+                </div>
+                
+                <div class="search-container">
+                    <input type="text" id="blog-search" placeholder="搜索博客文章...">
+                    <button id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="blog-grid">
+                    <div class="blog-card tech">
+                        <div class="blog-image">
+                            <img src="img/blog1.jpg" alt="PyTorch技巧与最佳实践">
+                            <div class="blog-date">2023年11月15日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>PyTorch技巧与最佳实践</h3>
+                            <p class="blog-excerpt">
+                                在这篇文章中，我分享了一些使用PyTorch进行深度学习研究和开发的实用技巧和最佳实践，包括内存优化、分布式训练和模型部署等方面。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">深度学习</span>
+                                <span class="tag">技术笔记</span>
+                            </div>
+                            <a href="blog/pytorch-tips.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card research">
+                        <div class="blog-image">
+                            <img src="img/blog2.jpg" alt="大型语言模型的未来发展方向">
+                            <div class="blog-date">2023年10月20日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>大型语言模型的未来发展方向</h3>
+                            <p class="blog-excerpt">
+                                随着GPT、LLaMA等大型语言模型的兴起，本文探讨了这一领域的未来发展方向，包括多模态融合、知识整合和可解释性等挑战与机遇。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">LLM</span>
+                                <span class="tag">NLP</span>
+                                <span class="tag">研究思考</span>
+                            </div>
+                            <a href="blog/llm-future.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card review">
+                        <div class="blog-image">
+                            <img src="img/blog3.jpg" alt="CVPR 2023亮点论文解读">
+                            <div class="blog-date">2023年9月5日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>CVPR 2023亮点论文解读</h3>
+                            <p class="blog-excerpt">
+                                本文对CVPR 2023会议中的几篇亮点论文进行了详细解读，包括生成式AI、3D视觉和自监督学习等方向的最新进展和创新点。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">CVPR</span>
+                                <span class="tag">计算机视觉</span>
+                                <span class="tag">论文解读</span>
+                            </div>
+                            <a href="blog/cvpr-2023-highlights.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card tech">
+                        <div class="blog-image">
+                            <img src="img/blog4.jpg" alt="Docker在机器学习项目中的应用">
+                            <div class="blog-date">2023年8月12日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Docker在机器学习项目中的应用</h3>
+                            <p class="blog-excerpt">
+                                本文介绍了如何使用Docker容器化机器学习项目，解决环境依赖问题，并实现从开发到部署的无缝过渡，提高研究和开发效率。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">Docker</span>
+                                <span class="tag">MLOps</span>
+                                <span class="tag">技术笔记</span>
+                            </div>
+                            <a href="blog/docker-ml.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card research">
+                        <div class="blog-image">
+                            <img src="img/blog5.jpg" alt="自监督学习在医学影像分析中的应用">
+                            <div class="blog-date">2023年7月25日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>自监督学习在医学影像分析中的应用</h3>
+                            <p class="blog-excerpt">
+                                本文探讨了如何利用自监督学习方法解决医学影像数据标注少、获取难的问题，并展示了几个成功应用案例和未来研究方向。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">自监督学习</span>
+                                <span class="tag">医学影像</span>
+                                <span class="tag">研究思考</span>
+                            </div>
+                            <a href="blog/self-supervised-medical.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                    
+                    <div class="blog-card review">
+                        <div class="blog-image">
+                            <img src="img/blog6.jpg" alt="Transformer架构的演进与应用">
+                            <div class="blog-date">2023年6月10日</div>
+                        </div>
+                        <div class="blog-content">
+                            <h3>Transformer架构的演进与应用</h3>
+                            <p class="blog-excerpt">
+                                从原始Transformer到Vision Transformer，本文回顾了Transformer架构的演进历程，分析了其在NLP、CV等领域的广泛应用和最新进展。
+                            </p>
+                            <div class="blog-tags">
+                                <span class="tag">Transformer</span>
+                                <span class="tag">深度学习</span>
+                                <span class="tag">论文解读</span>
+                            </div>
+                            <a href="blog/transformer-evolution.html" class="btn">阅读全文</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="pagination">
+                    <a href="#" class="active">1</a>
+                    <a href="#">2</a>
+                    <a href="#">3</a>
+                    <a href="#" class="next">下一页 &raquo;</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 张三. 保留所有权利。</p>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html> 
