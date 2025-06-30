@@ -147,4 +147,123 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     `;
     document.head.appendChild(style);
+    
+    // 自动更新最新动态功能
+    async function updateLatestNews() {
+        // 只在首页执行
+        if (!document.querySelector('.news')) return;
+        
+        try {
+            // 获取最新的学术成果
+            const publicationsResponse = await fetch('publications.html');
+            const publicationsHtml = await publicationsResponse.text();
+            const publicationsTemp = document.createElement('div');
+            publicationsTemp.innerHTML = publicationsHtml;
+            const publications = [];
+            
+            publicationsTemp.querySelectorAll('.publication-item').forEach(item => {
+                const year = item.querySelector('.publication-year').textContent;
+                const title = item.querySelector('h3').textContent;
+                const description = item.querySelector('.journal').textContent;
+                
+                publications.push({
+                    date: year,
+                    title: `论文：${title}`,
+                    description: description,
+                    type: 'publication'
+                });
+            });
+            
+            // 获取最新的项目
+            const projectsResponse = await fetch('projects.html');
+            const projectsHtml = await projectsResponse.text();
+            const projectsTemp = document.createElement('div');
+            projectsTemp.innerHTML = projectsHtml;
+            const projects = [];
+            
+            projectsTemp.querySelectorAll('.project-card').forEach(item => {
+                const title = item.querySelector('h3').textContent;
+                const description = item.querySelector('.project-description').textContent.trim();
+                
+                projects.push({
+                    date: '2023年', // 假设所有项目都是2023年的
+                    title: `项目：${title}`,
+                    description: description,
+                    type: 'project'
+                });
+            });
+            
+            // 获取最新的博客
+            const blogResponse = await fetch('blog.html');
+            const blogHtml = await blogResponse.text();
+            const blogTemp = document.createElement('div');
+            blogTemp.innerHTML = blogHtml;
+            const blogs = [];
+            
+            blogTemp.querySelectorAll('.blog-card').forEach(item => {
+                const date = item.querySelector('.blog-date').textContent;
+                const title = item.querySelector('h3').textContent;
+                const description = item.querySelector('.blog-excerpt').textContent.trim();
+                
+                blogs.push({
+                    date: date,
+                    title: `博客：${title}`,
+                    description: description,
+                    type: 'blog'
+                });
+            });
+            
+            // 合并所有内容并按日期排序
+            const allItems = [...publications, ...projects, ...blogs];
+            
+            // 将日期转换为可比较的格式进行排序
+            function convertDateForSorting(dateStr) {
+                // 处理"2023年11月15日"格式
+                if (dateStr.includes('月') && dateStr.includes('日')) {
+                    const year = parseInt(dateStr.match(/\d+(?=年)/)[0]);
+                    const month = parseInt(dateStr.match(/\d+(?=月)/)[0]) - 1; // 月份从0开始
+                    const day = parseInt(dateStr.match(/\d+(?=日)/)[0]);
+                    return new Date(year, month, day).getTime();
+                }
+                // 处理仅有年份"2023年"格式
+                else if (dateStr.includes('年')) {
+                    const year = parseInt(dateStr.match(/\d+(?=年)/)[0]);
+                    return new Date(year, 0, 1).getTime();
+                }
+                // 处理其他可能的格式
+                return new Date(dateStr).getTime();
+            }
+            
+            allItems.sort((a, b) => {
+                return convertDateForSorting(b.date) - convertDateForSorting(a.date);
+            });
+            
+            // 获取最新的三个项目
+            const latestItems = allItems.slice(0, 3);
+            
+            // 更新DOM
+            const newsContainer = document.querySelector('.news-items');
+            if (newsContainer) {
+                newsContainer.innerHTML = '';
+                
+                latestItems.forEach(item => {
+                    const newsItem = document.createElement('div');
+                    newsItem.className = 'news-item';
+                    newsItem.innerHTML = `
+                        <div class="news-date">${item.date}</div>
+                        <div class="news-content">
+                            <h3>${item.title}</h3>
+                            <p>${item.description}</p>
+                        </div>
+                    `;
+                    newsContainer.appendChild(newsItem);
+                });
+            }
+        } catch (error) {
+            console.error('更新最新动态时出错：', error);
+        }
+    }
+    
+    // 执行最新动态更新
+    updateLatestNews();
 }); 
