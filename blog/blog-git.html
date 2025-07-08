@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Git规范与团队协作实践 - 白起的学术网站</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="icon" href="../img/logo_baiqi.jpeg" type="image/jpeg">
+    <style>
+        .blog-post {
+            padding: 60px 0;
+        }
+        
+        .blog-post-layout {
+            display: flex;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* 目录导航栏样式 */
+        .table-of-contents {
+            width: 250px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .table-of-contents h3 {
+            margin: 0 0 15px 0;
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+        }
+        
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .toc-list li {
+            margin-bottom: 8px;
+        }
+        
+        .toc-list a {
+            color: #666;
+            text-decoration: none;
+            font-size: 0.9em;
+            display: block;
+            padding: 5px 10px;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+        
+        .toc-list a:hover {
+            background-color: #f0f0f0;
+            color: var(--primary-color);
+        }
+        
+        .toc-list a.active {
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        /* 二级目录样式 */
+        .toc-list .toc-level-2 {
+            padding-left: 15px;
+            font-size: 0.85em;
+        }
+        
+        /* 三级目录样式 */
+        .toc-list .toc-level-3 {
+            padding-left: 30px;
+            font-size: 0.8em;
+        }
+        
+        /* 文章内容区域 */
+        .blog-post-main {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .blog-post-header {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+        
+        .blog-post-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--secondary-color);
+        }
+        
+        .blog-post-meta {
+            color: var(--gray-color);
+            margin-bottom: 20px;
+        }
+        
+        .blog-post-meta span {
+            margin-right: 20px;
+        }
+        
+        .blog-post-meta i {
+            margin-right: 5px;
+            color: var(--primary-color);
+        }
+        
+        .blog-post-tags {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .blog-post-content {
+            line-height: 1.8;
+        }
+        
+        .blog-post-content p {
+            margin-bottom: 20px;
+        }
+        
+        .blog-post-content h1 {
+            font-size: 2.2em;
+            margin: 40px 0 20px;
+            color: var(--secondary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 10px;
+        }
+        
+        .blog-post-content h2 {
+            font-size: 1.8em;
+            margin: 40px 0 20px;
+            color: var(--secondary-color);
+        }
+        
+        .blog-post-content h3 {
+            font-size: 1.4em;
+            margin: 30px 0 15px;
+            color: var(--secondary-color);
+        }
+        
+        .blog-post-content h4 {
+            font-size: 1.2em;
+            margin: 25px 0 10px;
+            color: var(--secondary-color);
+        }
+        
+        .blog-post-content ul, .blog-post-content ol {
+            margin-bottom: 20px;
+            padding-left: 20px;
+        }
+        
+        .blog-post-content ul li, .blog-post-content ol li {
+            margin-bottom: 10px;
+        }
+        
+        .blog-post-content pre {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        .blog-post-content code {
+            font-family: 'Courier New', Courier, monospace;
+            background-color: #f5f5f5;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-size: 0.9em;
+        }
+        
+        .blog-post-content pre code {
+            background: none;
+            padding: 0;
+        }
+        
+        .blog-post-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+        
+        .blog-post-content table th,
+        .blog-post-content table td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        .blog-post-content table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: 500;
+        }
+        
+        .blog-post-content table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .blog-post-content blockquote {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: var(--gray-color);
+        }
+        
+        .blog-post-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+        }
+        
+        .blog-post-navigation a {
+            display: flex;
+            align-items: center;
+            color: var(--primary-color);
+            font-weight: 500;
+            text-decoration: none;
+        }
+        
+        .blog-post-navigation .prev i {
+            margin-right: 10px;
+        }
+        
+        .blog-post-navigation .next i {
+            margin-left: 10px;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            .blog-post-layout {
+                flex-direction: column;
+            }
+            
+            .table-of-contents {
+                position: static;
+                width: 100%;
+                order: 2;
+                margin-top: 30px;
+            }
+            
+            .blog-post-main {
+                order: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">
+                <a href="../index.html">白起的学术网站</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">首页</a></li>
+                <li><a href="../about.html">关于我</a></li>
+                <li><a href="../publications.html">学术成果</a></li>
+                <li><a href="../projects.html">开源项目</a></li>
+                <li><a href="../blog.html" class="active">博客</a></li>
+            </ul>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="blog-post">
+            <div class="container">
+                <div class="blog-post-layout">
+                    <!-- 目录导航栏 -->
+                    <aside class="table-of-contents">
+                        <h3>目录</h3>
+                        <ul class="toc-list">
+                            <li><a href="#git-规范">Git规范</a></li>
+                            <li><a href="#第一次提交">第一次提交</a>
+                                <ul class="toc-list">
+                                    <li><a href="#步骤一" class="toc-level-2">步骤一：本地初始化</a></li>
+                                    <li><a href="#步骤二" class="toc-level-2">步骤二：关联远程仓库</a></li>
+                                    <li><a href="#步骤三" class="toc-level-2">步骤三：推送代码</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="#后续修改提交">后续修改提交</a></li>
+                            <li><a href="#团队使用方法">团队使用方法</a>
+                                <ul class="toc-list">
+                                    <li><a href="#基本流程" class="toc-level-2">基本流程</a></li>
+                                    <li><a href="#分支开发" class="toc-level-2">分支开发模式</a></li>
+                                    <li><a href="#冲突处理" class="toc-level-2">冲突处理</a></li>
+                                    <li><a href="#rebase使用" class="toc-level-2">Rebase使用</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </aside>
+                    
+                    <!-- 文章主体内容 -->
+                    <div class="blog-post-main">
+                        <div class="blog-post-header">
+                            <h1>Git使用方法与基本规范</h1>
+                            <div class="blog-post-meta">
+                                <span><i class="far fa-calendar-alt"></i> 2025年7月7日</span>
+                                <span><i class="far fa-user"></i> 白起</span>
+                                <span><i class="far fa-clock"></i> 15分钟阅读</span>
+                            </div>
+                            <div class="blog-post-tags">
+                                <span class="tag">git</span>
+                                <span class="tag">github</span>
+                                <span class="tag">技术笔记</span>
+                                <span class="tag">团队协作</span>
+                            </div>
+                        </div>
+                        
+                        <div class="blog-post-content">
+                            <h1 id="git-规范">git规范</h1>
+                            <p>此规范不讲解背后的 git 原理、不讲解 git 的安装与配置，而是直接教授 git 在实际项目中的使用方法，简答易用。</p>
+
+                            <h1 id="第一次提交">第一次提交</h1>
+                            <p>首先你需要拥有一个仓库（无论是github还是gitee）！</p>
+
+                            <h2 id="步骤一">步骤一：本地初始化 Git 并连接远程仓库</h2>
+                            <p>打开终端或命令行工具，进入你的项目文件夹（推荐直接在代码编辑器中打开）：</p>
+                            <pre><code>cd path/yourproject</code></pre>
+
+                            <p><strong>初始化 Git 仓库：</strong></p>
+                            <pre><code>git init</code></pre>
+
+                            <p><strong>添加所有项目文件到 Git 暂存区：</strong></p>
+                            <pre><code>git add .</code></pre>
+
+                            <p>或者添加指定文件：</p>
+                            <pre><code>git add README.md src/main.py</code></pre>
+
+                            <p><strong>提交更改：</strong></p>
+                            <pre><code>git commit -m "Initial commit"</code></pre>
+
+                            <p>提交更改信息规范：</p>
+                            <pre><code>&lt;类型&gt;: &lt;简短说明&gt;
+For example: 
+git commit -m "feat: add login functionality"</code></pre>
+
+                            <h3>常用提交类型（type）</h3>
+                            <table>
+                                <tr>
+                                    <th>类型</th>
+                                    <th>含义</th>
+                                </tr>
+                                <tr>
+                                    <td><code>feat</code></td>
+                                    <td>新功能（feature）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>fix</code></td>
+                                    <td>修复 bug</td>
+                                </tr>
+                                <tr>
+                                    <td><code>docs</code></td>
+                                    <td>文档更新</td>
+                                </tr>
+                                <tr>
+                                    <td><code>style</code></td>
+                                    <td>样式调整（CSS、空格等）</td>
+                                </tr>
+                                <tr>
+                                    <td><code>refactor</code></td>
+                                    <td>重构代码</td>
+                                </tr>
+                                <tr>
+                                    <td><code>perf</code></td>
+                                    <td>性能优化</td>
+                                </tr>
+                                <tr>
+                                    <td><code>test</code></td>
+                                    <td>添加或修改测试代码</td>
+                                </tr>
+                                <tr>
+                                    <td><code>chore</code></td>
+                                    <td>构建过程或辅助工具的变动</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ci</code></td>
+                                    <td>持续集成配置更改</td>
+                                </tr>
+                                <tr>
+                                    <td><code>build</code></td>
+                                    <td>构建系统或依赖项更改</td>
+                                </tr>
+                            </table>
+
+                            <h2 id="步骤二">步骤二：关联 GitHub 远程仓库</h2>
+                            <p>在仓库后页面中，复制远程仓库地址（HTTPS 或 SSH）：</p>
+                            <pre><code>git remote add origin https://github.com/xx/xxx.git</code></pre>
+                            <p>推荐使用 HTTPS 地址，简单方便，也可以用 SSH 地址（需配置 SSH Key 到 GitHub）。</p>
+
+                            <h2 id="步骤三">步骤三：推送代码到远程仓库</h2>
+                            <p>首次推送需要指定分支（通常是 <code>main</code> 或 <code>master</code>）：</p>
+                            <pre><code>git push -u origin main</code></pre>
+                            <p>如果提示 branch 'main' not found，可能是默认分支是 master，你可以使用：</p>
+                            <pre><code>git push -u origin master</code></pre>
+
+                            <h3>示例完整流程</h3>
+                            <pre><code>cd my-project-folder
+git init
+git add .
+git commit -m "Initial commit"
+git remote add origin https://github.com/你的用户名/你的仓库名.git
+git push -u origin main</code></pre>
+
+                            <h1 id="后续修改提交">后续修改提交</h1>
+                            <p>后续提交建立在第一次提交的基础上，无团队使用时只需要执行 add→commit→push三个步骤即可。</p>
+                            <p>个人使用主要是注重于代码的版本管理，但是在团队协作中中使用 Git，核心目标是<strong>高效地共享代码、合并变更并解决冲突</strong>。当多人同时开发一个项目时，常常会遇到：开发进度不一致、合并冲突和提交历史混乱等各种问题。</p>
+
+                            <h2 id="团队使用方法">团队使用方法</h2>
+
+                            <h3 id="基本流程">Git 团队协作的基本流程</h3>
+
+                            <h3 id="分支开发">基于分支的开发模式（Feature Branch Workflow）</h3>
+                            <ol>
+                                <li>每个功能或任务创建一个独立分支：
+                                    <pre><code>git checkout -b feature/login</code></pre>
+                                </li>
+                                <li>在自己的分支上开发、提交更改：
+                                    <pre><code>git add .
+git commit -m "feat: implement login form"</code></pre>
+                                </li>
+                                <li>推送本地分支到远程仓库：
+                                    <pre><code>git push origin feature/login</code></pre>
+                                </li>
+                                <li>创建 Pull Request（PR）请求合并（GitHub/Gitee等平台支持）</li>
+                                <li>其他成员 Review 并批准后，合并进主分支</li>
+                            </ol>
+                            <p>四五这两点一般用的不多，因为在大多时候团队协作时已经为你分配了管理员的权限，可以不必请求直接合并。</p>
+
+                            <h3 id="冲突处理">出现冲突怎么办？</h3>
+                            <p>当两个人修改了 <strong>同一个文件的同一部分</strong>，Git 就无法自动合并，这时就会提示冲突。</p>
+
+                            <h3>如何发现冲突？</h3>
+                            <p>当你执行：</p>
+                            <pre><code>git pull origin main
+
+或者：
+
+git merge feature-branch</code></pre>
+                            <p>如果出现冲突，终端会提示类似：</p>
+                            <pre><code>CONFLICT (content): Merge conflict in src/index.js
+
+Automatic merge failed; fix conflicts and then commit the result.</code></pre>
+
+                            <h3>解决冲突的步骤</h3>
+                            <p>打开冲突文件，你会看到这样的内容：</p>
+                            <pre><code>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+console.log("Hello from main branch");
+
+=======
+
+console.log("Hello from feature branch");
+
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; feature/feature-branch</code></pre>
+                            <p>手动选择保留哪一部分代码，或者合并两部分内容</p>
+                            <p>删除 <code>&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>, <code>=======</code>, <code>&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code> 这些标记</p>
+                            <p>标记冲突已解决：</p>
+                            <pre><code>git add src/index.js</code></pre>
+                            <p>完成合并提交：</p>
+                            <pre><code>git commit -m "fix: resolve merge conflict"</code></pre>
+
+                            <h3 id="rebase使用">什么是 rebase？为什么用它？</h3>
+                            <p><code>rebase</code> 是一种替代 <code>merge</code> 的方式，用于将一个分支的更改"重放"到另一个分支之上，可以让提交历史更清晰、线性化。</p>
+                            <p>你正在开发 <code>feature/login</code> 分支，而 <code>main</code> 分支有新的提交。你想把 <code>main</code> 的更新合并进来，但不想产生合并提交。</p>
+                            <p><strong>使用 rebase：</strong></p>
+                            <pre><code>git checkout feature/login
+git rebase main</code></pre>
+                            <p>Git 会尝试将你的提交一个个应用在 <code>main</code> 的最新提交之上。</p>
+
+                            <h3>如果 rebase 中出现冲突：</h3>
+                            <ol>
+                                <li>Git 会暂停 rebase，提示哪个文件冲突。</li>
+                                <li>打开文件，像之前一样手动解决冲突。</li>
+                                <li>标记冲突已解决：
+                                    <pre><code>git add &lt;filename&gt;</code></pre>
+                                </li>
+                                <li>继续 rebase：
+                                    <pre><code>git rebase --continue</code></pre>
+                                </li>
+                                <li>如果你想中途放弃 rebase：
+                                    <pre><code>git rebase --abort</code></pre>
+                                </li>
+                            </ol>
+
+                            <h4>Merge vs Rebase 对比</h4>
+                            <table>
+                                <tr>
+                                    <th>区别</th>
+                                    <th>Merge</th>
+                                    <th>Rebase</th>
+                                </tr>
+                                <tr>
+                                    <td>提交历史</td>
+                                    <td>保留原始历史，有合并记录</td>
+                                    <td>线性历史，看起来更干净</td>
+                                </tr>
+                                <tr>
+                                    <td>是否改变提交历史</td>
+                                    <td>否</td>
+                                    <td>是（慎用于公共分支）</td>
+                                </tr>
+                                <tr>
+                                    <td>适合场景</td>
+                                    <td>主分支合并、多人共享分支</td>
+                                    <td>个人开发分支同步上游最新代码</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="blog-post-navigation">
+                            <a href="#" class="prev"><i class="fas fa-chevron-left"></i> 上一篇：CVPR 2023亮点论文解读</a>
+                            <a href="#" class="next">下一篇：Docker在机器学习项目中的应用 <i class="fas fa-chevron-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 baiqi. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // 目录导航功能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tocLinks = document.querySelectorAll('.toc-list a');
+            const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id]');
+            
+            // 平滑滚动到目标位置
+            tocLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetElement = document.getElementById(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80;
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // 滚动时高亮当前section
+            function highlightCurrentSection() {
+                const scrollPosition = window.scrollY + 100;
+                
+                let current = '';
+                headings.forEach(heading => {
+                    const sectionTop = heading.offsetTop;
+                    if (scrollPosition >= sectionTop) {
+                        current = heading.getAttribute('id');
+                    }
+                });
+                
+                tocLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === '#' + current) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+            
+            window.addEventListener('scroll', highlightCurrentSection);
+            highlightCurrentSection(); // 初始化
+        });
+    </script>
+</body>
+</html>
